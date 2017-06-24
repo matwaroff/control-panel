@@ -1,0 +1,28 @@
+body, div{
+    margin: 0;
+    font-family: sans-serif;
+}
+article{
+    display: block;
+    text-align: center;
+    background: url("img/mat_bkgrnd.png") center no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    height: 300px;
+}
+a{
+    display: block;
+    text-align: center;
+    vertical-align: bottom;
+    height: 300px;
+    line-height:300px;
+    color: white;
+    font-size:50px;
+    text-decoration: none;
+}
+.links{
+    flex-flow:  column wrap;
+    width:100%;
+    height:100%;
+    background: white;
+}
