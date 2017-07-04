@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto:100,900');
+@import "_bootstrap-variables.scss";
 $gradient-middle: #091720;
 $color-primary: rgba(26,38,52,1);
 $gradient-lighter-middle: rgb(24, 72, 96);
@@ -9,6 +10,9 @@ $color-detail: #FEE5B1;
 $font-lato: 'Lato', sans-serif;
 
 body{
+  @media(max-width: $screen-xs){
+    font-size: 2em;
+  }
 }
 .login{
   .login-title{
@@ -98,20 +102,20 @@ Index
         }
         margin-left:auto;
         margin-right:auto;
-        width: 200px;
-        height: 200px;
+        width: 10vw;
+        height: 10vw;
         background: $color-tertiary;
         line-height: 200px;
         text-align: center;
         transition: background .3s ease-in-out;
         transition: box-shadow .3s ease-out;
         .glyphicon{
-          font-size: 50px;
+          font-size: 5em;
           line-height: 200px;
           vertical-align: middle;
           color: whitesmoke;
           &.bold{
-            font-size: 60px;
+            font-size: 5em;
             font-family: $font-lato;
             font-weight:bold;
           }
@@ -153,12 +157,17 @@ Email Page
       }
     }
   }
-  form[action="email.php"]{
+  form[action="email"]{
     width: 500px;
   }
 
 }
-
+.sidebar{
+  background:white !important;
+  .nav-sidebar{
+    background-color: #fff;
+  }
+}
 .navbar .divider-vertical {
   height: 50px;
   margin: 0 9px;
@@ -202,10 +211,28 @@ Email Page
 .admin{
   form{
     display: inline-block;
+
   }
-  .domain-table{
-    .form-control{
+  .domain-table {
+    .form-control {
       width: 50%;
     }
+    .adminbox{
+      text-align: center;
+    }
   }
+
+}
+.new-user{
+  display: block;
+  width: 30vw;
+}
+
+footer{
+  background-color: #f5f5f5;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 9999;
 }

@@ -42,16 +42,17 @@ if(isset($_GET['id'])){
                     foreach ($domains as $d) {
                         ?>
                         <tr>
-                            <td><a href="domain.php?id=<?= hash("md5", $d['domainID']); ?>"><?= $d['domainName']; ?></a>
+                            <td><a href="domain?id=<?= hash("md5", $d['domainID']); ?>"><?= $d['domainName']; ?></a>
                             </td>
-                            <td><a href="domain.php?id=<?= hash("md5", $d['domainID']); ?>">
+                            <td><a href="domain?id=<?= hash("md5", $d['domainID']); ?>">
                                     <button class="btn btn-primary">Edit</button>
                                 </a></td>
                         </tr>
                     <?php } ?>
-
                 </table>
             </div>
+            <hr>
+            <a href="newdomain"><button class="btn btn-primary">Add a New Domain</button></a>
             <?php else: ?>
                 <h1 class="page-header"><?= $domain['domainName']; ?></h1>
                 <p>Coming soon...</p>

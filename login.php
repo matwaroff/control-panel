@@ -19,7 +19,7 @@
                 <?php if(!$register): ?>
                 <h1 class="text-center login-title">Sign in to continue to <?= $data->getSetting('siteTitle'); ?></h1>
                 <div class="account-wall">
-                    <form class="form-signin" action="index.php" method="post">
+                    <form class="form-signin" action="index" method="post">
                         <input type="text" class="form-control" placeholder="Username" required autofocus name="username">
                         <input type="password" class="form-control" placeholder="Password" required name="password">
                         <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -35,7 +35,7 @@
                 <?php else: ?>
                     <h1 class="text-center login-title">Request access to <?= $data->getSetting('siteTitle'); ?></h1>
                     <div class="account-wall">
-                        <form class="form-signin" action="index.php?request" method="post">
+                        <form class="form-signin" action="index?request" method="post">
                             <div class="form-group">
                                 <label class="form-control-label" for="newuser">Username</label>
                                 <input type="text" class="form-control" placeholder="Username" required autofocus name="newuser" id="newuser">
@@ -60,7 +60,7 @@
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Send Request</button>
                         </form>
-                        <a href="login.php" class="text-center new-account">Sign in</a>
+                        <a href="login" class="text-center new-account">Sign in</a>
                     </div>
                 <?php endif; ?>
 

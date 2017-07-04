@@ -14,17 +14,19 @@ if(array_key_exists('adminSettings', $_POST)){
     }
 }
 
-if(isset($_GET['users'])){
+if(isset($_GET['users'])) {
     $adminpage = 1;
-    if(isset($_GET['delete'])){
-        $data->deleteUser($_GET['delete']);
+    if (isset($_GET['delete'])){
+        $confirmdelete = true;
+        if(isset($_POST['deleteconfirm'])){
+            $data->deleteUser($_GET['delete']);
+        }
     }
 }
-else if(isset($_GET['domains'])){
+else if(isset($_GET['domains']))
     $adminpage = 2;
-}else{
+else
     $adminpage = 0;
-}
 
 if(isset($_GET['adduser']) && isset($_POST['username'])){
     $user = $_POST['username'];

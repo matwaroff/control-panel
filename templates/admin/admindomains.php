@@ -18,9 +18,9 @@
                 ?>
                 <tr>
                     <td class="domain-name">
-                        <a href="domain.php?id=<?= hash("md5", $d['domainID']); ?>"><?= $d['domainName']; ?></a>
+                        <a href="domain?id=<?= hash("md5", $d['domainID']); ?>"><?= $d['domainName']; ?></a>
                     </td>
-                    <form method="post" action="admin.php?domains&edit">
+                    <form method="post" action="admin?domains&edit">
                         <input type="hidden" name="editowner" value="<?= $d['domainID']; ?>">
                         <td class="owner"><span class="username"></span> <?= $d['username']; ?>
                             <select class="select-user" name="domain-user-select">
@@ -32,7 +32,7 @@
 
                     </form>
                     <td class="actions">
-                        <a href="domain.php?id=<?= hash("md5", $d['domainID']); ?>">
+                        <a href="domain?id=<?= hash("md5", $d['domainID']); ?>">
                             <button class="btn btn-sm btn-primary">Edit</button>
                         </a>
                     </td>

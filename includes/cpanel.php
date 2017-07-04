@@ -17,7 +17,7 @@ class cpanel
     public $statusstring;
     public $error;
     public $active;
-
+    public $username;
 
     function __construct(){
         $this->signedIn = 0;
@@ -39,14 +39,15 @@ class cpanel
         $lname = $array['lastName'];
         $status = $array['permission'];
 
-        if($username != $user){
+        if($username != $user)
             throw new Exception("Incorrect password");
-        }
         $this->signedIn = 1;
         $this->id = $id;
         $this->permission = $status;
         $this->fname = $fname;
         $this->lname = $lname;
+        $this->username = $username;
+        $this->accessLog();
     }
     function logout(){
         setcookie("session", null, 0);
@@ -88,7 +89,6 @@ class cpanel
             }
         }
     }
-
 
     function getPage(){
         $fileName = basename($_SERVER['PHP_SELF']);
@@ -202,7 +202,7 @@ class cpanel
         $sql = "SELECT id, username, firstName, lastName, email, permission FROM users";
         return $this->fetchRows($sql);
     }
-    function addUser($user, $pass, $fname, $lname, $email){
+    function addUser($user, $pass, $fname, $lname, $email, $admin){
         try{
             $user = $this->conn->real_escape_string(chop($user));
             $pass = hash("sha512", $this->conn->real_escape_string(chop($pass)));
@@ -211,7 +211,7 @@ class cpanel
             $email = $this->conn->real_escape_string(chop($email));
             $sql = "INSERT INTO users (username, password, firstName, lastName, email, permission) VALUES ('$user', '$pass', '$fname', '$lname', '$email', -1);";
             $this->conn->query($sql);
-            $this->requestAccess(mysqli_insert_id($this->conn), $user, $email);
+            //$this->requestAccess(mysqli_insert_id($this->conn), $user, $email);
             $this->setStatus("Successfully added user");
         }catch(Exception $e){
             $this->setStatus("ERROR: $e", true);
@@ -224,11 +224,14 @@ class cpanel
             $this->conn->query($domainsql);
             if($this->conn->query($sql)){
                 $this->setStatus("Successfully deleted user: $userid");
+                header("Location: admin.php?users");
             }else{
                 $this->setStatus("ERROR: user delete failed", true);
+                header("Location: admin.php?users");
             }
         }else{
             $this->setStatus("NOT AN ADMIN", true);
+            header("Location: index.php");
         }
     }
 
@@ -252,5 +255,14 @@ class cpanel
         $mail->Body = $body;
         if(!$mail->Send()) throw new Exception($mail->ErrorInfo);
 
+    }
+    function debug(){
+        $this->setStatus("Debug test");
+    }
+    function accessLog(){
+        $timestamp = date('Y-m-d', strtotime("now"));
+        $time = date('H:i:s', strtotime("now +4hr"));
+        $sql = "INSERT INTO access_log (username, date, time) VALUES ('$this->username', '$timestamp', '$time');";
+        $this->conn->query($sql);
     }
 }

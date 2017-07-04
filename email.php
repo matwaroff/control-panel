@@ -109,8 +109,9 @@ if(isset($_POST['newemail'])){
                                                 <tr>
                                                     <td><?= $user; ?></td>
                                                     <td class="email-buttons">
-                                                        <a href="?edit=<?= $user; ?>"><button class="btn btn-primary btn-sm">Change Password</button></a>
-                                                        <a href="?delete=<?= $user; ?>"><button class="btn btn-danger btn-sm">Delete Email</button></a>
+
+                                                        <a href="?edit=<?= $user; ?>"><button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> </button></a>
+                                                        <a href="?delete=<?= $user; ?>"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button></a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -138,7 +139,7 @@ if(isset($_POST['newemail'])){
             <?php elseif(!$delete && $editemail): ?>
                 <h4><?= $editemail; ?></h4>
                 <h5 class="page-header text-muted">Change Password</h5>
-                <form method="post" action="email.php" class="editemail">
+                <form method="post" action="email" class="editemail">
                     <div class="input-group">
                         <span class="input-group-addon">New Password:</span>
                         <input type="password" class="form-control pass" placeholder="New Password" name="newPass" value="">
@@ -154,7 +155,7 @@ if(isset($_POST['newemail'])){
                     <h4 class="page-header">Delete Email - <?= $delete; ?></h4>
                     <p>Are you sure you want to delete:</p>
                     <span><?=$delete;?></span>
-                    <form action="email.php" method="post">
+                    <form action="email" method="post">
                         <input type="hidden" value="<?=$delete;?>" name="deleting-email">
                         <input type="submit" name="delete-confirm" class="btn btn-danger btn-lg" value="Delete Email">
                     </form>

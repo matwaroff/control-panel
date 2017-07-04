@@ -30,7 +30,7 @@ class mailinabox
      * @param $fields Fields for post and put : STRING
      * @return array
      */
-    function options($jsonurl, $method, $fields){
+    function options($jsonurl, $method = false, $fields = false){
         $options = array(
             CURLOPT_URL => $jsonurl,
             CURLOPT_USERPWD => "$this->user:$this->pass",
@@ -74,6 +74,17 @@ class mailinabox
             $finaloutput = $outputarray;
         }
         return array("output" => $finaloutput, "info" => $data['info']);
+    }
+    function numEmails($domains)
+    {
+        $emails = array();
+        foreach ($domains as $domain){
+            $emails[] = $this->emailsRequest($domain['domainName'])['output'];
+        }
+        $count = 0;
+        foreach ($emails as $email)
+            $count += count($email);
+        return $count;
     }
 
     function newUser($email, $pass){
